@@ -1,0 +1,34 @@
+
+
+.icon {
+    padding: 10px;
+    min-width: 40px;
+}
+
+.fa-search {
+    position: relative;
+    left: 60px;
+}
+
+.searchBarInputField {
+    text-indent: 30px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    width: 20%;
+}
+
+.optionDisplay {
+    background-color: blueviolet;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    width: 20%;
+}
+
+.noResultFoundDisplay {
+    background-color: orange;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    width: 20%;
+}
