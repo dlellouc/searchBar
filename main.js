@@ -17,23 +17,16 @@ function appendCustomizedSearchBar(appendToElement, optionsArray, optionsType) {
     searchBarInputField.title = 'input change options filtering search bar';
     searchBarInputField.placeholder = 'Search ' + optionsType + '...';
 
-    searchBarInputField.addEventListener('input', function() {
+    searchBarInputField.addEventListener('input', () => {
         // model - updating the filtered options array using the search value that has just changed
         let searchValue = searchBarInputField.value;
-        let filteredOptionsArray = optionsArray.filter(function(element) {
-            return element.startsWith(searchValue);
-        });
+        let filteredOptionsArray = optionsArray.filter((element) => element.startsWith(searchValue));
         filteredOptionsArray.sort();
 
         // view - updating the options display
         optionsContainer.innerHTML = '';                            // clearing the options container
         if (filteredOptionsArray.length !== 0) {                    // if there are options to display
-            filteredOptionsArray.forEach(function(element) {        // appending the options display to the options container
-                const elementDisplay = document.createElement('p');
-                elementDisplay.className = 'optionDisplay';
-                elementDisplay.innerText = element;
-                optionsContainer.append(elementDisplay);
-            });
+            displayOptions(filteredOptionsArray);
         } else {
             const noResultFoundDisplay = document.createElement('p');
             noResultFoundDisplay.className = 'noResultFoundDisplay';
@@ -54,20 +47,25 @@ function appendCustomizedSearchBar(appendToElement, optionsArray, optionsType) {
     const optionsContainer = document.createElement('div');
     optionsContainer.className = 'optionsDiv';
 
+    // options display
+    const displayOptions = (arr) => {
+        optionsContainer.innerHTML = '';            // clearing the options container
+        arr.forEach(function(element) {             // appending the options display to the options container
+            const elementDisplay = document.createElement('p');
+            elementDisplay.className = 'optionDisplay';
+            elementDisplay.innerText = element;
+            optionsContainer.append(elementDisplay);
+        });
+    };
+
     // appending to the appendToElement
     searchBarContainer.append(searchBarWithIcon);
     searchBarContainer.append(optionsContainer);
     appendToElement.append(searchBarContainer);
 
     // options first display
-    let filteredOptionsArray = optionsArray;
-    filteredOptionsArray.sort().forEach(function(element) {
-        const elementDisplay = document.createElement('p');
-        elementDisplay.className = 'optionDisplay';
-        elementDisplay.innerText = element;
-        optionsContainer.append(elementDisplay);
-    });
-
+    let filteredOptionsArray = [...optionsArray];
+    displayOptions(filteredOptionsArray.sort());
 }
 
 
